@@ -12,7 +12,6 @@ Errors = function(text) {
     err.innerHTML = '<div class="alert alert-danger" role="alert">' + text + '</div>'
 }
 
-
 document.addEventListener("DOMContentLoaded", function(event) {
     var credentials = new Object();
     credentials.password = document.getElementById('password');
@@ -20,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     credentials.signupbtn = document.getElementById('signup');
 
     credentials.signupbtn.addEventListener('click', e => {
-        alert("clicked")
         const user = credentials.username.value;
         const pass = credentials.password.value;
         const auth = firebase.auth();
