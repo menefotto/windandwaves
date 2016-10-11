@@ -14,61 +14,47 @@ Errors = function(text) {
     err.innerHTML = message
 }
 
-document.addEventListener("DOMContentLoaded", function(event) {
-    var credentials = new Object();
-    var errMsg = "";
 
-    credentials.password = document.getElementById('password');
-    credentials.username = document.getElementById('username');
-    credentials.signupbtn = document.getElementById('signup');
-    credentials.loginbtn = document.getElementById('login');
-    credentials.resetbtn = document.getElementById('reset');
+$("#signup").click(function() {
+    const user = $("#username").val();
+    const pass = $("#password").val();
+    const auth = firebase.auth();
 
-    if (credentials.signupbtn) {
-        credentials.signupbtn.addEventListener('click', e => {
-            const user = credentials.username.value;
-            const pass = credentials.password.value;
-            const auth = firebase.auth();
+    console.log(user + pass);
+    auth.createUserWithEmailAndPassword(user, pass).catch(function(error) {
+        var errorCode = error.code;
+        errorMsg = error.message;
 
-            auth.createUserWithEmailAndPassword(user, pass).catch(function(error) {
-                var errorCode = error.code;
-                errorMsg = error.message;
-
-                Errors(errorMsg);
-            });
-        });
-    }
-
-    if (credentials.loginbtn) {
-        credentials.loginbtn.addEventListener('click', e => {
-            const user = credentials.username.value;
-            const pass = credentials.password.value;
-            const auth = firebase.auth();
-
-            auth.signInWithEmailAndPassword(user, pass).catch(function(error) {
-                var errorCode = error.code;
-                errorMsg = error.message;
-
-                Errors(errorMsg);
-            });
-        });
-    }
-
-    if (credentials.resetbtn) {
-        credentials.resetbtn.addEventListener('click', e => {
-            const user = credentials.username.value;
-            const auth = firebase.auth();
-
-            auth.sendPasswordResetEmail(user).catch(function(error) {
-                var errorCode = error.code;
-                errorMsg = error.message;
-
-                Errors(errorMsg);
-            });
-        });
-    }
-
+        Errors(errorMsg);
+    });
 });
+
+$("#login").click(function() {
+    const user = $("#username").val();
+    const pass = $("#password").val();
+    const auth = firebase.auth();
+    alert(user + pass);
+
+    auth.signInWithEmailAndPassword(user, pass).catch(function(error) {
+        var errorCode = error.code;
+        errorMsg = error.message;
+
+        Errors(errorMsg);
+    });
+});
+
+$("#reset").click(function() {
+    const user = $("#username").val();
+    const auth = firebase.auth();
+    alert("user" + user);
+    auth.sendPasswordResetEmail(user).catch(function(error) {
+        var errorCode = error.code;
+        errorMsg = error.message;
+
+        Errors(errorMsg);
+    });
+});
+
 
 firebase.auth().onAuthStateChanged(function(firebaseUser) {
     if (firebaseUser) {
