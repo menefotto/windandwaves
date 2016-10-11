@@ -8,31 +8,31 @@ const config = {
 firebase.initializeApp(config);
 
 
-var credentials = new Object();
-
-window.document.onload = function() {
+document.addEventListener("DOMContentLoaded", function(event) {
+    var credentials = new Object();
     credentials.password = document.getElementById('password');
     credentials.username = document.getElementById('username');
     credentials.signupbtn = document.getElementById('signup');
-};
 
-credentials.signupbtn.addEventListener('click', e => {
-    const user = credentials.username.value;
-    const pass = credentials.password.value;
+    credentials.signupbtn.addEventListener('click', e => {
+        alert("clicked")
+        const user = credentials.username.value;
+        const pass = credentials.password.value;
+        const auth = firebase.auth();
 
-    firebase.auth().createUserWithEmailAndPassword(user, pass).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        auth.createUserWithEmailAndPassword(user, pass).catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
 
-        if (errorCode == 'auth/weak-password') {
-            alert('The password is too weak.');
-        } else {
-            alert(errorMessage);
-        }
-        console.log(error);
+            if (errorCode == 'auth/weak-password') {
+                alert('The password is too weak.');
+            } else {
+                alert(errorMessage);
+            }
+            console.log(error);
+        });
     });
 });
-
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
