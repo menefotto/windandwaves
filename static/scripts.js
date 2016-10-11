@@ -9,16 +9,20 @@ firebase.initializeApp(config);
 
 Errors = function(text) {
     var err = document.getElementById('err');
-    err.innerHTML = '<div class="alert alert-danger" role="alert">' + text + '</div>'
+    const errbtn = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+    const message = '<div class="alert alert-danger" role="alert">' + errbtn + text + '</div>'
+    err.innerHTML = message
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
     var credentials = new Object();
+    var errMsg = "";
 
     credentials.password = document.getElementById('password');
     credentials.username = document.getElementById('username');
     credentials.signupbtn = document.getElementById('signup');
     credentials.loginbtn = document.getElementById('login');
+    credentials.resetbtn = document.getElementById('reset');
 
     if (credentials.signupbtn) {
         credentials.signupbtn.addEventListener('click', e => {
@@ -28,13 +32,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
             auth.createUserWithEmailAndPassword(user, pass).catch(function(error) {
                 var errorCode = error.code;
-                var errorMessage = error.message;
+                errorMsg = error.message;
 
-                if (errorCode == 'auth/weak-password') {
-                    Errors('The password is too weak.');
-                } else {
-                    Errors(errorMessage);
-                }
+                Errors(errorMsg);
             });
         });
     }
@@ -47,15 +47,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
             auth.signInWithEmailAndPassword(user, pass).catch(function(error) {
                 var errorCode = error.code;
-                var errorMessage = error.message;
+                errorMsg = error.message;
 
-                Errors(errorMessage);
+                Errors(errorMsg);
             });
         });
     }
+
+    if (credentials.resetbtn) {
+        credentials.resetbtn.addEventListener('click', e => {
+            const user = credentials.username.value;
+            const pass = credentials.password.value;
+            const auth = firebase.auth();
+
+            auth.sendPasswordResetEmail(user).catch(function(error) {
+                var errorCode = error.code;
+                errorMsg = error.message;
+
+                Errors(errorMsg);
+            });
+        });
+    }
+
 });
 
-firebase.auth().onAuthStateChanged(firebaseUser => {
+firebase.auth().onAuthStateChanged(function(firebaseUser) {
     if (firebaseUser) {
         console.log("logged in");
     } else {
