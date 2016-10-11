@@ -7,6 +7,11 @@ const config = {
 };
 firebase.initializeApp(config);
 
+Errors = function(text) {
+    var err = document.getElementById('err');
+    err.innerHTML = '<div class="alert alert-danger" role="alert">' + text + '</div>'
+}
+
 
 document.addEventListener("DOMContentLoaded", function(event) {
     var credentials = new Object();
@@ -25,11 +30,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             var errorMessage = error.message;
 
             if (errorCode == 'auth/weak-password') {
-                alert('The password is too weak.');
+                Errors('The password is too weak.');
             } else {
-                alert(errorMessage);
+                Errors(errorMessage);
             }
-            console.log(error);
         });
     });
 });

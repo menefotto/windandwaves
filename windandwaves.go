@@ -1,4 +1,4 @@
-package main
+package windandwaves
 
 import (
 	"html/template"
@@ -33,14 +33,10 @@ func renderTemplate(w http.ResponseWriter, filename string) {
 	}
 }
 
-func main() {
-	mux := http.NewServeMux()
+func init() {
+	http.HandleFunc("/", indexView)
+	http.HandleFunc("/login", loginView)
+	http.HandleFunc("/signup", signupView)
 
-	mux.HandleFunc("/", indexView)
-	mux.HandleFunc("/login", loginView)
-	mux.HandleFunc("/signup", signupView)
-
-	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 }
