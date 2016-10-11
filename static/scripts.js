@@ -57,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if (credentials.resetbtn) {
         credentials.resetbtn.addEventListener('click', e => {
             const user = credentials.username.value;
-            const pass = credentials.password.value;
             const auth = firebase.auth();
 
             auth.sendPasswordResetEmail(user).catch(function(error) {
