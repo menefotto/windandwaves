@@ -14,31 +14,50 @@ Errors = function(text) {
 
 document.addEventListener("DOMContentLoaded", function(event) {
     var credentials = new Object();
+
     credentials.password = document.getElementById('password');
     credentials.username = document.getElementById('username');
     credentials.signupbtn = document.getElementById('signup');
+    credentials.loginbtn = document.getElementById('login');
 
-    credentials.signupbtn.addEventListener('click', e => {
-        const user = credentials.username.value;
-        const pass = credentials.password.value;
-        const auth = firebase.auth();
+    if (credentials.signupbtn) {
+        credentials.signupbtn.addEventListener('click', e => {
+            const user = credentials.username.value;
+            const pass = credentials.password.value;
+            const auth = firebase.auth();
 
-        auth.createUserWithEmailAndPassword(user, pass).catch(function(error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
+            auth.createUserWithEmailAndPassword(user, pass).catch(function(error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
 
-            if (errorCode == 'auth/weak-password') {
-                Errors('The password is too weak.');
-            } else {
-                Errors(errorMessage);
-            }
+                if (errorCode == 'auth/weak-password') {
+                    Errors('The password is too weak.');
+                } else {
+                    Errors(errorMessage);
+                }
+            });
         });
-    });
+    }
+
+    if (credentials.loginbtn) {
+        credentials.loginbtn.addEventListener('click', e => {
+            const user = credentials.username.value;
+            const pass = credentials.password.value;
+            const auth = firebase.auth();
+
+            auth.signInWithEmailAndPassword(user, pass).catch(function(error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+
+                Errors(errorMessage);
+            });
+        });
+    }
 });
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
-        console.log(firebaseUser);
+        console.log("logged in");
     } else {
         console.log("not logged in");
     }
