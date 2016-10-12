@@ -15,8 +15,25 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) {
     }
 });
 
+var setDisplayError = function(state) {
+    localStorage.setItem("displayError", state);
+}
+
+var checkShowError = function() {
+    var displayError = localStorage.getItem("displayError");
+    if (displayError == true) {
+        $("#err").toggleClass("hide");
+        setDisplayError("true");
+    } else {
+        $("#err").toggleClass("hide");
+        setDisplayError("false");
+    }
+}
 
 $(function() {
+    checkShowError();
+
+
     $("#signup").click(function() {
         const user = $("#username").val();
         const pass = $("#password").val();
@@ -24,6 +41,7 @@ $(function() {
 
         auth.createUserWithEmailAndPassword(user, pass).catch(function(error) {
             $("#errp").append(error.message);
+            setDisplayError("true");
         });
     });
 
@@ -34,6 +52,7 @@ $(function() {
 
         auth.signInWithEmailAndPassword(user, pass).catch(function(error) {
             $("#errp").append(error.message);
+            setDisplayError("true");
         });
     });
 
@@ -43,6 +62,7 @@ $(function() {
 
         auth.sendPasswordResetEmail(user).catch(function(error) {
             $("#errp").append(error.message);
+            setDisplayError("true");
         });
     });
 
