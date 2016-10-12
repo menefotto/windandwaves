@@ -18,8 +18,8 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) {
 
 
 PrintError = function(text) {
-    const err = document.getElementById('err');
-    err.innerHTML = message;
+    $("#err").html(text);
+    //$('#err').removeClass('hide');
 }
 
 
