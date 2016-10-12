@@ -18,14 +18,17 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) {
 var setDisplayError = function(state) {
     localStorage.setItem("displayError", state);
 }
+setDisplayError("false");
+
 
 var checkShowError = function() {
     var displayError = localStorage.getItem("displayError");
-    if (displayError == true) {
-        $("#err").toggleClass("hide");
+    console.log("de: "+ displayError);
+    if (displayError === "true") {
+        $("#err").removeClass("hide");
         setDisplayError("true");
     } else {
-        $("#err").toggleClass("hide");
+        $("#err").addClass("hide");
         setDisplayError("false");
     }
 }
