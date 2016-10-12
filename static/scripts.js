@@ -15,57 +15,61 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) {
     }
 });
 
-var setDisplayError = function(state) {
-    localStorage.setItem("displayError", state);
+var pushError = function(error) {
+    $("#errp").append("<strong>Ops something went wrong! </strong>" + error.message);
+    $("#err").removeClass("hide");
 }
-setDisplayError("false");
 
-
-var checkShowError = function() {
-    var displayError = localStorage.getItem("displayError");
-    console.log("de: "+ displayError);
-    if (displayError === "true") {
-        $("#err").removeClass("hide");
-        setDisplayError("true");
-    } else {
-        $("#err").addClass("hide");
-        setDisplayError("false");
-    }
+var pushMessage = function(message) {
+    $("#errp").append("<strong>Operation perform successfully! </strong>" + message);
+    $("#errp").removeClass("alert-danger");
+    $("#errp").addClass("alert-success");
+    $("#err").removeClass("hide");
 }
 
 $(function() {
-    checkShowError();
+    $(".close").click(function() {
+        location.reload();
+    });
 
+    $("#signup").click(function(event) {
+        event.preventDefault();
 
-    $("#signup").click(function() {
         const user = $("#username").val();
         const pass = $("#password").val();
         const auth = firebase.auth();
 
-        auth.createUserWithEmailAndPassword(user, pass).catch(function(error) {
-            $("#errp").append(error.message);
-            setDisplayError("true");
+        auth.createUserWithEmailAndPassword(user, pass).catch(function(value) {
+            pushMessage(value);
+        }, function(error) {
+            pushError(error);
         });
     });
 
-    $("#login").click(function() {
+    $("#login").click(function(event) {
+        event.prenventDefault();
+
         const user = $("#username").val();
         const pass = $("#password").val();
         const auth = firebase.auth();
 
-        auth.signInWithEmailAndPassword(user, pass).catch(function(error) {
-            $("#errp").append(error.message);
-            setDisplayError("true");
+        auth.signInWithEmailAndPassword(user, pass).then(function(value) {
+            pushMessage(value);
+        }, function(error) {
+            pushError(error);
         });
     });
 
-    $("#reset").click(function() {
+    $("#reset").click(function(event) {
+        event.preventDefault();
+
         const user = $("#username").val();
         const auth = firebase.auth();
 
-        auth.sendPasswordResetEmail(user).catch(function(error) {
-            $("#errp").append(error.message);
-            setDisplayError("true");
+        auth.sendPasswordResetEmail(user).then(function(value) {
+            pushMessage(value);
+        }, function(error) {
+            pushError(error);
         });
     });
 
