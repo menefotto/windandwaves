@@ -33,7 +33,6 @@ $(function() {
     });
 
     $("#signup").click(function(event) {
-        event.preventDefault();
 
         const user = $("#username").val();
         const pass = $("#password").val();
@@ -45,10 +44,11 @@ $(function() {
         }, function(error) {
             pushError(error);
         });
+
+        return false;
     });
 
     $("#login").click(function(event) {
-        event.prenventDefault();
 
         const user = $("#username").val();
         const pass = $("#password").val();
@@ -60,6 +60,8 @@ $(function() {
         }, function(error) {
             pushError(error);
         });
+
+        return false;
     });
 
     $("#reset").click(function(event) {
@@ -76,8 +78,7 @@ $(function() {
     });
 
     $("#logout").click(function() {
-        firebase.signOut();
-        location.replace("index");
+        firebase.auth().signOut();
     });
 
 
