@@ -15,20 +15,16 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) {
     }
 });
 
-PrintError = function(text) {
-    const errbtn = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-    const message = '<div class="alert alert-danger" role="alert">' + errbtn + text + '</div>';
-    const err = document.getElementById('err');
 
-    localStorage.setItem("lastError", message);
+
+PrintError = function(text) {
+    const err = document.getElementById('err');
     err.innerHTML = message;
 }
 
-GetLastError = function(err) {
-    return localStorage.getItem("lastError");
-}
 
 $(function() {
+
     $("#signup").click(function() {
         const user = $("#username").val();
         const pass = $("#password").val();
