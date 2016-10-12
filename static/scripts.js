@@ -16,8 +16,7 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) {
 });
 
 AlertError = function(msg) {
-    $("#errbtn").text(msg);
-    //$('#err').removeClass('hide');
+    $("#err").text(msg);
 }
 
 $(function() {
@@ -53,11 +52,4 @@ $(function() {
         });
     });
 
-    lastError = $("#err").text();
-    console.log(lastError);
-    if (lastError != " ") {
-        localStorage.setItem("lastError", "");
-    } else {
-        AlertError(GetLastError());
-    }
 });
