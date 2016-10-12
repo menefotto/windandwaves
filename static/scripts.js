@@ -15,16 +15,12 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) {
     }
 });
 
-
-
-PrintError = function(text) {
-    $("#err").html(text);
+AlertError = function(msg) {
+    $("#errbtn").text(msg);
     //$('#err').removeClass('hide');
 }
 
-
 $(function() {
-
     $("#signup").click(function() {
         const user = $("#username").val();
         const pass = $("#password").val();
@@ -32,7 +28,7 @@ $(function() {
 
         auth.createUserWithEmailAndPassword(user, pass).catch(function(error) {
 
-            PrintError(error.message);
+            AlertError(error.message);
         });
     });
 
@@ -43,7 +39,7 @@ $(function() {
 
         auth.signInWithEmailAndPassword(user, pass).catch(function(error) {
 
-            PrintError(error.message);
+            AlertError(error.message);
         });
     });
 
@@ -53,7 +49,7 @@ $(function() {
 
         auth.sendPasswordResetEmail(user).catch(function(error) {
 
-            PrintError(error.message);
+            AlertError(error.message);
         });
     });
 
@@ -62,6 +58,6 @@ $(function() {
     if (lastError != " ") {
         localStorage.setItem("lastError", "");
     } else {
-        PrintError(GetLastError());
+        AlertError(GetLastError());
     }
 });
