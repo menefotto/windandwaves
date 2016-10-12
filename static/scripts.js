@@ -41,6 +41,7 @@ $(function() {
 
         auth.createUserWithEmailAndPassword(user, pass).then(function(value) {
             location.replace("loggedin");
+            $("#nickname").text(firebase.auth().currentUser);
         }, function(error) {
             pushError(error);
         });
@@ -55,6 +56,7 @@ $(function() {
 
         auth.signInWithEmailAndPassword(user, pass).then(function(value) {
             location.replace("loggedin");
+            $("#nickname").text(firebase.auth().currentUser);
         }, function(error) {
             pushError(error);
         });
@@ -73,6 +75,10 @@ $(function() {
         });
     });
 
-    $("#nickname").text(firebase.auth().currentUser);
+    $("#logout").click(function() {
+        firebase.signOut();
+        location.replace("index");
+    });
+
 
 });
