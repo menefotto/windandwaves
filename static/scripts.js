@@ -15,9 +15,6 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) {
     }
 });
 
-AlertError = function(msg) {
-    $("#err").text(msg);
-}
 
 $(function() {
     $("#signup").click(function() {
@@ -26,8 +23,7 @@ $(function() {
         const auth = firebase.auth();
 
         auth.createUserWithEmailAndPassword(user, pass).catch(function(error) {
-
-            AlertError(error.message);
+            $("#errp").text(error.message);
         });
     });
 
@@ -37,8 +33,7 @@ $(function() {
         const auth = firebase.auth();
 
         auth.signInWithEmailAndPassword(user, pass).catch(function(error) {
-
-            AlertError(error.message);
+            $("#errp").text(error.message);
         });
     });
 
@@ -47,8 +42,7 @@ $(function() {
         const auth = firebase.auth();
 
         auth.sendPasswordResetEmail(user).catch(function(error) {
-
-            AlertError(error.message);
+            $("#errp").text(error.message);
         });
     });
 
