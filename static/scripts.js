@@ -40,7 +40,7 @@ $(function() {
         const auth = firebase.auth();
 
         auth.createUserWithEmailAndPassword(user, pass).then(function(value) {
-            pushMessage(value);
+            location.replace("loggedin");
         }, function(error) {
             pushError(error);
         });
@@ -54,7 +54,7 @@ $(function() {
         const auth = firebase.auth();
 
         auth.signInWithEmailAndPassword(user, pass).then(function(value) {
-            pushMessage(value);
+            location.replace("loggedin");
         }, function(error) {
             pushError(error);
         });

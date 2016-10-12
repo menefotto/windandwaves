@@ -19,6 +19,11 @@ func signupView(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, path.Join("static", "signup.html"))
 }
 
+func loggedinView(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, path.Join("static", "loggedin.html"))
+}
+
+
 func passwordResetView(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, path.Join("static", "password_reset.html"))
 }
@@ -41,7 +46,9 @@ func init() {
 	http.HandleFunc("/", indexView)
 	http.HandleFunc("/login", loginView)
 	http.HandleFunc("/signup", signupView)
+	http.HandleFunc("/loggedin", loggedinView)
 	http.HandleFunc("/password_reset", passwordResetView)
+	
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 }
