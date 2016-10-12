@@ -1,104 +1,96 @@
-<html lang=en>
+<html lang="en">
 
 <head>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-
     <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="static/css/bootstrap-social.css" rel="stylesheet">
-    <link href="static/css/login.css" rel="stylesheet">
+    <link href="static/css/bootstrap-social.css" rel="stylsheet">
     <link href="static/css/app.css" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
-    <script type="text/javascript" src="static/scripts.js"></script>
 
 </head>
 
 <body>
     <div>
-        <nav class=" navbar navbar-inverse ">
-            <div class="container-fluid ">
-                <div class="navbar-header ">
-                    <a class="navbar-brand-over navbar-brand " href="# ">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand-over navbar-brand" href="#">
                         <img class="img-responsive center-block img-rounded" alt="Brand" src="static/imgs/icon-43-wind.png">
                     </a>
                 </div>
 
+                <button type="button" class="btn-pos navbar-btn navbar-right btn btn-default "> <a href="login" /a> Login </button>
                 <p class="text-center site-title"> Where you can exchange and buy windsurf gear </p>
             </div>
         </nav>
 
-    </div>
-
-
-
-    <div class="container">
-        <div id="err" class="alert alert-danger" role="alert">
-            <button id="err" type="button" class="close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <input type="text" class="search-bar form-control" placeholder="Search for...">
+            </div>
+            <div class="col-md-4"></div>
         </div>
 
-        <div class="omb_login">
-            <h3 class="omb_authTitle"> Type in the email account to reset </a>
-            </h3>
-            <div>
-                <div class="col-xs-4 col-sm-2">
-                </div>
-                <div class="col-xs-4 col-sm-2">
-                </div>
-                <div class="col-xs-4 col-sm-2">
-                </div>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="#" class="thumbnail">
+                    <img class="gly-img img-responsive img-thumbnail" src="static/imgs/falcon.jpg" alt="...">
+                </a>
             </div>
-
-            <div class="row omb_row-sm-offset-3 omb_loginOr">
-                <div class="col-xs-12 col-sm-6">
-                    <hr class="omb_hrOr">
-                </div>
+            <div class="col-md-4">
+                <a href="#" class="thumbnail">
+                    <img class="gly-img img-responsive img-thumbnail" src="static/imgs/jpsl.jpg" alt="...">
+                </a>
             </div>
-
-            <div class="row omb_row-sm-offset-3">
-                <div class="col-xs-12 col-sm-6">
-                    <form class="omb_loginForm" action="" autocomplete="off" method="POST">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text" class="form-control" id="username" placeholder="email address">
-                        </div>
-                        <span class="help-block"></span>
-
-                        <div class="input-group">
-                            <span class="help-block"></span>
-                        </div>
-                        <span class="help-block"></span>
-
-                        <button class="btn btn-lg btn-primary btn-block" id="reset" type="submit"> Reset </button>
-                    </form>
-                </div>
+            <div class="col-md-4">
+                <a href="#" class="thumbnail">
+                    <img class="gly-img img-responsive img-thumbnail" src="static/imgs/rrdcult.jpg" alt="...">
+                </a>
             </div>
-            <div class="row omb_row-sm-offset-3">
-                <div class="col-xs-12 col-sm-3">
-                </div>
-                <div class="col-xs-12 col-sm-3">
-                </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <a href="#" class="thumbnail">
+                    <img class="gly-img img-responsive img-thumbnail" src="static/imgs/tabou.jpg" alt="...">
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="thumbnail">
+                    <img class="gly-img img-responsive img-thumbnail" src="static/imgs/xfire.jpg" alt="...">
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="thumbnail">
+                    <img class="gly-img img-responsive img-thumbnail" src="static/imgs/xfire1.jpg" alt="...">
+                </a>
             </div>
         </div>
 
 
 
+
+
+
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <p class="footer text-center"> All rights reserved, created by wind85 </p>
+        </nav>
     </div>
-
-    <nav class="navbar navbar-default navbar-fixed-bottom ">
-        <p class="footer text-center "> All rights reserved, created by wind85 </p>
-    </nav>
-
-    >
-
 </body>
+
+
+
+<!-- jquery version for bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+>
 
 </html>
