@@ -39,7 +39,7 @@ $(function() {
         const pass = $("#password").val();
         const auth = firebase.auth();
 
-        auth.createUserWithEmailAndPassword(user, pass).catch(function(value) {
+        auth.createUserWithEmailAndPassword(user, pass).then(function(value) {
             pushMessage(value);
         }, function(error) {
             pushError(error);
