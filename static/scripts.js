@@ -23,7 +23,7 @@ $(function() {
         const auth = firebase.auth();
 
         auth.createUserWithEmailAndPassword(user, pass).catch(function(error) {
-            $("#errp").text(error.message);
+            $("#errp").append(error.message);
         });
     });
 
@@ -33,7 +33,7 @@ $(function() {
         const auth = firebase.auth();
 
         auth.signInWithEmailAndPassword(user, pass).catch(function(error) {
-            $("#errp").text(error.message);
+            $("#errp").append(error.message);
         });
     });
 
@@ -42,7 +42,7 @@ $(function() {
         const auth = firebase.auth();
 
         auth.sendPasswordResetEmail(user).catch(function(error) {
-            $("#errp").text(error.message);
+            $("#errp").append(error.message);
         });
     });
 
