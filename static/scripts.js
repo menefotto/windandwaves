@@ -73,4 +73,6 @@ $(function() {
         });
     });
 
+    $("#nickname").text(firebase.auth().currentUser);
+
 });
