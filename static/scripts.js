@@ -68,8 +68,8 @@ $(function() {
     const user = $('#username').val()
     const auth = firebase.auth()
 
-    auth.sendPasswordResetEmail(user).then(function(value) {
-      pushMessage(value)
+    auth.sendPasswordResetEmail(user).then(function() {
+      pushMessage("An email should be arriving shortly!")
     }, function(error) {
       pushError(error)
     })
@@ -80,14 +80,15 @@ $(function() {
     
     const passwd = $('#passwd_reset').val()
     const passwd1 = $('#passwd_reset1').val()
-    
     if ( passwd === passwd1) {        
       pushError("Ops passwords must be the same!")
       return
     }
     
+    const code = $(location).attr("href").split("=")[2].split("&")[0]
+    console.log("reset code is: " code)
+    
     const auth = firebase.auth()
-
     auth.confirmPasswordReset(code, passwd).then(function() {
         location.replace('login')
       },
