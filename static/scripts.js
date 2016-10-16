@@ -76,17 +76,19 @@ $(function() {
   })
   
   $('#change_passwd').click(function(event) {
+    event.preventDefault()
+    
     const passwd = $('#passwd_reset').val()
     const passwd1 = $('#passwd_reset1').val()
+    
     if ( passwd === passwd1) {        
       pushError("Ops passwords must be the same!")
-      
       return
     }
     
     const auth = firebase.auth()
 
-    auth.confirmPasswordReset(code, newPasswd).then(function() {
+    auth.confirmPasswordReset(code, passwd).then(function() {
         location.replace('login')
       },
       function() {

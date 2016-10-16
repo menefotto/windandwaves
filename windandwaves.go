@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"path"
+
+	"github.com/gorilla/mux"
 )
 
 func indexView(w http.ResponseWriter, r *http.Request) {
@@ -20,7 +22,6 @@ func signupView(w http.ResponseWriter, r *http.Request) {
 }
 
 func loggedinView(w http.ResponseWriter, r *http.Request) {
-	//log.Println("value: ",r.FormValue("nickname"))
 	renderTemplate(w, path.Join("static", "loggedin.html"), nil)
 }
 
@@ -29,6 +30,8 @@ func passwordResetView(w http.ResponseWriter, r *http.Request) {
 }
 
 func completePasswordResetView(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	log.Println("value: ", r.FormValue("passwd_reset1"))
 	renderTemplate(w, path.Join("static", "complete_password_reset.html"), nil)
 }
 
@@ -47,12 +50,15 @@ func renderTemplate(w http.ResponseWriter, filename string, optval map[string]st
 }
 
 func init() {
-	http.HandleFunc("/", indexView)
-	http.HandleFunc("/login", loginView)
-	http.HandleFunc("/signup", signupView)
-	http.HandleFunc("/loggedin", loggedinView)
-	http.HandleFunc("/password_reset", passwordResetView)
-	http.HandleFunc("/complete_password_reset", completePasswordResetView)
+	gorillamux := mux.NewRouter()
+
+	gorillamux.HandleFunc("/", indexView)
+	gorillamux.HandleFunc("/login", loginView)
+	gorillamux.HandleFunc("/signup", signupView)
+	gorillamux.HandleFunc("/loggedin", loggedinView)
+	gorillamux.HandleFunc("/password_reset", passwordResetView)
+	gorillamux.HandleFunc("/complete_password_reset/*", completePasswordResetView)
+	http.Handle("/", gorillamux) // registering http to use gorilla mux
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 }
