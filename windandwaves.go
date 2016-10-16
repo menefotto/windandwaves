@@ -57,7 +57,7 @@ func init() {
 	gorillamux.HandleFunc("/signup", signupView)
 	gorillamux.HandleFunc("/loggedin", loggedinView)
 	gorillamux.HandleFunc("/password_reset", passwordResetView)
-	gorillamux.HandleFunc("/complete_password_reset/*", completePasswordResetView)
+	gorillamux.HandleFunc(`/complete_password_reset/{rest:[a-zA-Z0-9=\?\&\=\<\>\-\/]+}`, completePasswordResetView)
 	http.Handle("/", gorillamux) // registering http to use gorilla mux
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
