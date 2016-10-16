@@ -86,11 +86,14 @@ $(function() {
       return
     }
     
-    const code = $(location).attr("href").split("=")[2].split("&")[0]
+    var codeurl = $(location).attr("href").split("=")[2]
+    const code = codeurl.split("&")[0]
+    
     console.log("reset code is: ", code)
     
     const auth = firebase.auth()
-    auth.confirmPasswordReset(code, passwd).then(function() {
+    var res = auth.confirmPasswordReset(code, passwd)
+    res.then(function() {
         location.replace('login')
       },
       function() {
