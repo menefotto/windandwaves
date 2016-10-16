@@ -10,7 +10,7 @@ firebase.initializeApp(config)
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log(user.email + ' logged in')
-    $('#nickname').append(user.email )
+    $('#nickname').append(user.email)
   } else {
     console.log('not logged in')
   }
@@ -74,6 +74,28 @@ $(function() {
       pushError(error)
     })
   })
+  
+  $('#change_passwd').click(function(event) {
+    const passwd = $('#passwd_reset').val()
+    const passwd1 = $('#passwd_reset1').val()
+    if ( passwd === passwd1) {        
+      pushError("Ops passwords must be the same!")
+      
+      return
+    }
+    
+    const auth = firebase.auth()
+
+    auth.confirmPasswordReset(code, newPasswd).then(function() {
+        location.replace('login')
+      },
+      function() {
+        pushError("Invalid reset code!")
+      })
+
+    return false
+  })
+
 
   $('#logout').click(function() {
     firebase.auth().signOut()
