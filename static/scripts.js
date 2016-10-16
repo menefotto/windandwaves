@@ -9,10 +9,26 @@ firebase.initializeApp(config)
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
-    console.log(user.email + ' logged in')
-    $('#nickname').append(user.email)
+    $(".navbar-btn").remove()
+    btn = `<div class="btn-group navbar-right">
+                    <button id="nickname" type="button" class="navbar-btn btn-pos btn btn-primary dropdown-toggle" 
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      `+ user.email + "  " + `<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>` +
+                    `</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Selling Items</a></li>
+                        <li><a href="#">Interesting Items</a></li>
+                        <li><a href="#">Profile settings </a></li>
+                        <li role="separator" class="divider"></li>
+                        <li id="logout" onclick="javascript: firebase.auth().signOut(); window.location = '/'"> <a href="#"> Logout</a> </li>
+                    </ul>
+                </div>`
+    $(".navbar-header").after(btn)
   } else {
-    console.log('not logged in')
+    $(".btn-group").remove()
+    btn = `<button type="button" class="btn-pos navbar-btn navbar-right btn btn-primary" 
+            onclick="javascript: window.location='/login'"> Login </button>`
+    $(".navbar-header").after(btn)
   }
 })
 
@@ -101,8 +117,8 @@ $(function () {
 
     return false
   })
-
-  $('#logout').click(function () {
-    firebase.auth().signOut()
-  })
+  
+  //$("#logout").click(function (){
+  //  firebase.auth().signOut()
+  //  })
 })
