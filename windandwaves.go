@@ -8,27 +8,27 @@ import (
 )
 
 func indexView(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, path.Join("static", "index.html"))
+	renderTemplate(w, path.Join("static", "index.html"), nil)
 }
 
 func loginView(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, path.Join("static", "login.html"))
+	renderTemplate(w, path.Join("static", "login.html"), nil)
 }
 
 func signupView(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, path.Join("static", "signup.html"))
+	renderTemplate(w, path.Join("static", "signup.html"), nil)
 }
 
 func loggedinView(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, path.Join("static", "loggedin.html"))
+	log.Println("value: ",r.FormValue("nickname"))
+	renderTemplate(w, path.Join("static", "loggedin.html"),nil)
 }
-
 
 func passwordResetView(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, path.Join("static", "password_reset.html"))
+	renderTemplate(w, path.Join("static", "password_reset.html"), nil)
 }
 
-func renderTemplate(w http.ResponseWriter, filename string) {
+func renderTemplate(w http.ResponseWriter, filename string, optval map[string]string) {
 	log.Println("loading templ named " + filename)
 
 	templ, err := template.ParseFiles(filename)
@@ -36,7 +36,7 @@ func renderTemplate(w http.ResponseWriter, filename string) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
-	err = templ.Execute(w, nil)
+	err = templ.Execute(w, optval)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

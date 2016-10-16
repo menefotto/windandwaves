@@ -1,85 +1,84 @@
 const config = {
-    apiKey: "AIzaSyCsy7Y7JIBrblVA8n8yzsbLYDdiUymgG68",
-    authDomain: "testapp-e2023.firebaseapp.com",
-    databaseURL: "https://testapp-e2023.firebaseio.com",
-    storageBucket: "testapp-e2023.appspot.com",
-    messagingSenderId: "317031868553"
-};
-firebase.initializeApp(config);
+  apiKey: 'AIzaSyCsy7Y7JIBrblVA8n8yzsbLYDdiUymgG68',
+  authDomain: 'testapp-e2023.firebaseapp.com',
+  databaseURL: 'https://testapp-e2023.firebaseio.com',
+  storageBucket: 'testapp-e2023.appspot.com',
+  messagingSenderId: '317031868553'
+}
+firebase.initializeApp(config)
 
-firebase.auth().onAuthStateChanged(function(firebaseUser) {
-    if (firebaseUser) {
-        console.log("logged in");
-    } else {
-        console.log("not logged in");
-    }
-});
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    console.log(user.email + ' logged in')
+    $('#nickname').append(user.email )
+  } else {
+    console.log('not logged in')
+  }
+})
 
 var pushError = function(error) {
-    $("#errp").append("<strong>Ops something went wrong! </strong>" + error.message);
-    $("#err").removeClass("hide");
+  $('#errp').append('<strong>Ops something went wrong! </strong>' + error.message)
+  $('#err').removeClass('hide')
 }
 
 var pushMessage = function(message) {
-    $("#errp").append("<strong>Operation perform successfully! </strong>" + message);
-    $("#errp").removeClass("alert-danger");
-    $("#errp").addClass("alert-success");
-    $("#err").removeClass("hide");
+  $('#errp').append('<strong>Operation perform successfully! </strong>' + message)
+  $('#errp').removeClass('alert-danger')
+  $('#errp').addClass('alert-success')
+  $('#err').removeClass('hide')
 }
 
 $(function() {
-    $(".close").click(function() {
-        location.reload();
-    });
+  $('.close').click(function() {
+    location.reload()
+  })
 
-    $("#signup").click(function(event) {
+  $('#signup').click(function(event) {
+    const user = $('#username').val()
+    const pass = $('#password').val()
+    const auth = firebase.auth()
 
-        const user = $("#username").val();
-        const pass = $("#password").val();
-        const auth = firebase.auth();
+    auth.createUserWithEmailAndPassword(user, pass).then(function(value) {
+      location.replace('loggedin')
+    }, function(error) {
+      pushError(error)
+    })
 
-        auth.createUserWithEmailAndPassword(user, pass).then(function(value) {
-            location.replace("loggedin");
-            $("#nickname").text(firebase.auth().currentUser);
-        }, function(error) {
-            pushError(error);
-        });
+    return false
+  })
 
-        return false;
-    });
+  $('#login').click(function(event) {
+    const user = $('#username').val()
+    const pass = $('#password').val()
+    const auth = firebase.auth()
 
-    $("#login").click(function(event) {
+    auth.signInWithEmailAndPassword(user, pass).then(function(value) {
+        location.replace('loggedin')
+      },
+      function(error) {
+        pushError(error)
+      })
 
-        const user = $("#username").val();
-        const pass = $("#password").val();
-        const auth = firebase.auth();
+    return false
+  })
 
-        auth.signInWithEmailAndPassword(user, pass).then(function(value) {
-            location.replace("loggedin");
-            $("#nickname").text(firebase.auth().currentUser);
-        }, function(error) {
-            pushError(error);
-        });
+  $('#reset').click(function(event) {
+    event.preventDefault()
 
-        return false;
-    });
+    const user = $('#username').val()
+    const auth = firebase.auth()
 
-    $("#reset").click(function(event) {
-        event.preventDefault();
+    auth.sendPasswordResetEmail(user).then(function(value) {
+      pushMessage(value)
+    }, function(error) {
+      pushError(error)
+    })
+  })
 
-        const user = $("#username").val();
-        const auth = firebase.auth();
+  $('#logout').click(function() {
+    firebase.auth().signOut()
+  })
 
-        auth.sendPasswordResetEmail(user).then(function(value) {
-            pushMessage(value);
-        }, function(error) {
-            pushError(error);
-        });
-    });
-
-    $("#logout").click(function() {
-        firebase.auth().signOut();
-    });
-
-
-});
+  
+ 
+})
