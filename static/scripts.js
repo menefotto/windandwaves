@@ -78,12 +78,12 @@ $(function () {
 
   $('#change_passwd').click(function (event) {
     event.preventDefault()
-    
+
     var codeurl = $(location).attr('href').split('=')[2]
     const code = codeurl.split('&')[0]
-    
+
     const auth = firebase.auth()
-    
+
     var passwd = $('#passwd_reset').val()
     var passwd1 = $('#passwd_reset1').val()
     if (passwd !== passwd1) {
@@ -93,9 +93,9 @@ $(function () {
 
     var res = auth.confirmPasswordReset(code, passwd)
     res.then(function () {
-      location.replace('login')
+      location.replace('../login')
     },
-      function() {
+      function () {
         pushError('Invalid reset code!')
       })
 
