@@ -1,4 +1,4 @@
-{{ define "base" }}
+{{ define "base_private" }}
 <!DOCTYPE html lang="en">
 
 <head>
@@ -30,7 +30,22 @@
                         <img class="img-responsive center-block img-rounded" alt="Brand" src="/static/imgs/icon-43-wind.png">
                     </a>
                 </div>
+                <div id="group-btn" class="btn-group navbar-right">
+                    <button id="loggedin-btn" type="button" class="navbar-btn btn-pos btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span id="span-btn" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> UserName
+                    </button>
+                    <ul id="list" class="dropdown-menu">
+                        <li><a href="#">Selling Items</a></li>
+                        <li><a href="#">Interesting Items</a></li>
+                        <li><a href="#">Profile settings </a></li>
+                        <li role="separator" class="divider"></li>
+                        <li id="logout" onclick="javascript: firebase.auth().signOut(); window.location = '/'"> <a href="#"> Logout</a> </li>
+                    </ul>
+                </div>
+
                 <p class="text-center site-title"> Where you can sell and buy windsurf gear </p>
+
+                
             </div>
         </nav>
 

@@ -10,30 +10,30 @@ import (
 )
 
 func indexView(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "index.html", nil)
+	renderTemplate(w, "index.html", "base_pubblic", nil)
 }
 
 func loginView(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "login.html", nil)
+	renderTemplate(w, "login.html", "base", nil)
 }
 
 func signupView(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "signup.html", nil)
+	renderTemplate(w, "signup.html", "base", nil)
 }
 
 func loggedinView(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "loggedin.html", nil)
+	renderTemplate(w, "loggedin.html", "base_private", nil)
 }
 
 func passwordResetView(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "reset_password.html", nil)
+	renderTemplate(w, "reset_password.html", "base", nil)
 }
 
 func changePasswordView(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "change_password.html", nil)
+	renderTemplate(w, "change_password.html", "base", nil)
 }
 
-func renderTemplate(w http.ResponseWriter, filename string, optval map[string]interface{}) {
+func renderTemplate(w http.ResponseWriter, filename, basetmpl string, optval map[string]interface{}) {
 
 	tmpl, ok := templates[filename]
 	if !ok {
@@ -42,7 +42,7 @@ func renderTemplate(w http.ResponseWriter, filename string, optval map[string]in
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	err := tmpl.ExecuteTemplate(w, "base", optval)
+	err := tmpl.ExecuteTemplate(w, basetmpl, optval)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
@@ -62,10 +62,10 @@ func loadTemplates() error {
 	Must := template.Must
 	Parse := template.ParseFiles
 
-	templates["index.html"] = Must(Parse("index.tmpl", "base.tmpl"))
+	templates["index.html"] = Must(Parse("index.tmpl", "base_pubblic.tmpl"))
 	templates["login.html"] = Must(Parse("login.tmpl", "base.tmpl"))
 	templates["signup.html"] = Must(Parse("signup.tmpl", "base.tmpl"))
-	templates["loggedin.html"] = Must(Parse("loggedin.tmpl", "base.tmpl"))
+	templates["loggedin.html"] = Must(Parse("loggedin.tmpl", "base_private.tmpl"))
 	templates["reset_password.html"] = Must(Parse("reset_password.tmpl", "base.tmpl"))
 	templates["change_password.html"] = Must(Parse("change_password.tmpl", "base.tmpl"))
 
