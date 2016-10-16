@@ -86,7 +86,7 @@ $(function () {
     
     var passwd = $('#passwd_reset').val()
     var passwd1 = $('#passwd_reset1').val()
-    if (passwd === passwd1) {
+    if (passwd !== passwd1) {
       pushError('Ops passwords must be the same!')
       return false
     }
