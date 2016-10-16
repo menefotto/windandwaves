@@ -17,14 +17,14 @@ firebase.auth().onAuthStateChanged(function(user) {
 })
 
 var pushError = function(error) {
-  $('#errp').append('<strong>Ops something went wrong! </strong>' + error.message)
+  $('#errp').append('<strong>Ops something went wrong: </strong>' + error.message)
   $('#err').removeClass('hide')
 }
 
 var pushMessage = function(message) {
-  $('#errp').append('<strong>Operation perform successfully! </strong>' + message)
-  $('#errp').removeClass('alert-danger')
-  $('#errp').addClass('alert-success')
+  $('#errp').append('<strong>Operation perform successfully: </strong>' + message)
+  $('#err').removeClass('alert-danger')
+  $('#err').addClass('alert-success')
   $('#err').removeClass('hide')
 }
 
@@ -68,7 +68,8 @@ $(function() {
     const user = $('#username').val()
     const auth = firebase.auth()
 
-    auth.sendPasswordResetEmail(user).then(function() {
+    var res = auth.sendPasswordResetEmail(user)
+    res.then(function() {
       pushMessage("An email should be arriving shortly!")
     }, function(error) {
       pushError(error)
