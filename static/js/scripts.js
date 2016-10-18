@@ -40,6 +40,8 @@ function updateNick () {
     pushError(error.message)
   })
 
+  userSet(nick, null, null)
+
   window.setTimeout(function () {
     $('#collapseNick').collapse('hide')
   }, 1500)
@@ -91,7 +93,7 @@ function updatePhoto () {
       url = uploadTask.snapshot.downloadURL
 
       // cache user image localy and set it
-      saveImg(url)
+      userSet(user.displayName, url, null)
       // actually update user profile
       user.updateProfile({photoURL: url}).then(function () {
         pushMessage(user.displayName + ' Your new profile pic had been updated successfully!')
@@ -150,6 +152,22 @@ function login () {
   return false
 }
 
+function logOut () {
+  var user = firebase.auth().currentUser
+
+  if (!user.displayName) {
+    userSet(user.displayName, null, 'false')
+  }else {
+    userSet(user.email, null, 'false')
+  }
+
+  firebase.auth().signOut().then(function () {
+    // ok case    
+  }, function (error) {
+    pushError(error.message)
+  })
+}
+
 function signup () {
   const user = $('#username').val()
   const pass = $('#password').val()
@@ -199,7 +217,7 @@ function loggedinRedirect (user) {
 
   if (cuser == 'yes') {
     if (location.pathname == '/login') {
-      location.replace('../loggedin')
+      location.replace('../profile_settings')
     }
   }
 
@@ -211,13 +229,22 @@ function loggedinRedirect (user) {
     $('#profileImg').attr('src', user.photoURL)
   }
 
+  cuser.displayName = ''
+
   if (!user.displayName) {
+    cuser.displayName = user.email
     $('#loggedin-btn').append(s + user.email + e + '  ' + span)
   }else {
+    cuser.displayName = user.displayName
     $('#loggedin-btn').append(s + user.displayName + e + '  ' + span)
   }
 
   $('#loggedin-btn').removeClass('hide')
+  if (!user.photoURL) {
+    setUser(cuser.displayName, null, 'true')
+  }else {
+    setUser(cuser.displayName, user.photoURL, 'true')
+  }
 }
 
 // password  reset/change functions
@@ -297,6 +324,13 @@ function saveImg (url) {
 }
 
 // chat functions
+function getCurDateTime () {
+  var date = new Date()
+  var unixTime = date.getTime()
+
+  return unixTime
+}
+
 function displayMessage (key, displayName, text, photoUrl) {
   var helpSpan = '<span class="help-block"></span>'
   name = '<strong>' + displayName + ' : </strong>'
@@ -304,34 +338,70 @@ function displayMessage (key, displayName, text, photoUrl) {
 }
 
 function loadMessages () {
-  divs = $('#msgList').find('div')
-  if (divs.lenght > 1) {
-    return
-  }
-
   const msgs = firebase.database().ref('/messages')
 
   var setMessage = function (data) {
     var val = data.val()
     displayMessage(data.key, val.name, val.text, val.photoUrl)
+    // needed to keep the bar scrolled down
+    var chat = $('#chat').get(0)
+    chat.scrollTop = chat.scrollHeight - chat.clientHeight
   }.bind(this)
 
-  msgs.limitToLast(12).on('child_added', setMessage)
+  displayUsers()
+
+  msgs.limitToLast(20).on('child_added', setMessage)
 }
 
 function sendMessage () {
+  const date = getCurDateTime()
   const user = firebase.auth().currentUser
   const msg = $('#msg').val()
   const name = user.displayName
   $('#msg').val('')
 
-  firebase.database().ref('/messages/' + user.uid).update({'name': name, 'text': msg}).then(function (spanshot) {
-    displayMessage(null, name , msg , user.photoURL)
-  }, function (error) {
+  firebase.database().ref('/messages/' + date).update({'name': name, 'text': msg}).then(function (spanshot) {}, function (error) {
     if (error.code == 'PERMISSION_DENIED') {
       pushError(' Messages must no be longer than 100 charachters!')
-    }else{
+    }else {
       pushError(error.message)
-    }    
+    }
+  })
+}
+
+function userSet (name, photoUrl, status) {
+  var users = firebase.database().ref('/users')
+  const user = firebase.auth().currentUser
+  var userData = {}
+  
+  if (status) {
+    userData[user.uid] = status
+  }else {
+    return false
+  }
+
+  users.update(userData).then(function () {}, function (error) {
+    pushMessage(error.message)
+  })
+}
+
+function displayUsers () {
+  const users = firebase.database().ref('/users')
+  users.on('child_changed', function (spanshot) {
+    snapshot.forEach(function (user) {
+      var data = user.val()
+      console.log(data)
+      $('#users-found').append('<div>' + data.name + ' ' + data.online + '</div>')
+    })
+  }, function (error) {
+    pushError(error.message)
+  })
+
+  const query = users.orderByKey()
+  query.once('value').then(function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      var data = childSnapshot.val()
+      $('#users-found').append('<div>' + data.name + ' ' + data.status + '</div>')
+    })
   })
 }

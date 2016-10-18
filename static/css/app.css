@@ -60,9 +60,36 @@ img {
 }
 
 .chat-msgs {
+   overflow-y: scroll;
+   max-height: 550px;
    border-style: groove;
+   
+   padding: 3%;
 }
 
 .chat-msg-send{
    margin-right: 7%;
 }
+
+.noscroll{
+    overflow: hidden;
+}
+
+.scoller{
+}
+
+.center-right{
+}
+.user-search{
+    height: 550px;
+    border-style: groove;
+    margin-right: 10%;
+    padding: 5%;
+}
+
+.users-found{
+   overflow-y: scroll;
+   max-height: 90%;
+   padding: 3%;
+}
+

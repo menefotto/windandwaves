@@ -23,7 +23,7 @@
     <link rel="shortcut icon" href="/static/imgs/favicon.ico" type="image/x-icon" />
 </head>
 
-<body>
+<body class="noscroll">
     <div>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -41,7 +41,7 @@
                         <li><a href="/messages"> Messages </a></li>
                         <li><a href="/profile_settings">Profile settings </a></li>
                         <li role="separator" class="divider"></li>
-                        <li id="logout" onclick="javascript: firebase.auth().signOut(); window.location = '/'"> <a href="#"> Logout</a> </li>
+                        <li id="logout" onclick="logOut()"> <a href="/"> Logout </a> </li>
                     </ul>
                 </div>
 
