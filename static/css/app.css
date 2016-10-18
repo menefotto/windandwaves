@@ -45,3 +45,24 @@ img {
 .hide {
     display: none;
 }
+
+.list-right{
+    float: right;
+}
+
+.collapsable{
+    padding: 10%;
+    background-color: lightgray;
+}
+
+.collapsable-btn {
+    padding-left: 80%;
+}
+
+.chat-msgs {
+   border-style: groove;
+}
+
+.chat-msg-send{
+   margin-right: 7%;
+}

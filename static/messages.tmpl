@@ -1,0 +1,29 @@
+{{ define "content" }}
+<div class="row">
+    <div class="col-md-3">
+    </div>
+    
+    <div id="msgContainer" class="col-md-6">
+        <div id="err" class="alert alert-danger hide">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <h5 id="errp"></h5>
+        </div>
+        <div class="chat-msgs">
+            <ul id="msgList">
+        
+                <span class="help-block"></span>
+                <div id="msgSend" class="input-group chat-msg-send">
+                    <input id="msg" type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" onclick="sendMessage()" type="button"> Send </button>
+                    </span>
+                </div>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        
+    </div>
+</div>
+{{ end }}

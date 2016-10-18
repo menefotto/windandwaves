@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link href="/static/css/bootstrap-social.css" rel="stylesheet">
     <link href="/static/css/login.css" rel="stylesheet">
+    <link href="/static/css/bubbles.css" rel="stylesheet">
     <link href="/static/css/app.css" rel="stylesheet">
     <!-- Optional fonts -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -16,7 +17,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
-    <script type="text/javascript" src="/static/scripts.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap-filestyle.min.js"> </script>
+    <script type="text/javascript" src="static/js/scripts.js"></script>
     
     <link rel="shortcut icon" href="/static/imgs/favicon.ico" type="image/x-icon" />
 </head>
@@ -31,13 +33,13 @@
                     </a>
                 </div>
                 <div id="group-btn" class="btn-group navbar-right">
-                    <button id="loggedin-btn" type="button" class="navbar-btn btn-pos btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span id="span-btn" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> UserName
+                    <button id="loggedin-btn" type="button" class="hide navbar-btn btn-pos btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="" id="profileImg" class="img-rounded" alt="Profile Image" width="32" height="32">
                     </button>
                     <ul id="list" class="dropdown-menu">
-                        <li><a href="#">Selling Items</a></li>
-                        <li><a href="#">Interesting Items</a></li>
-                        <li><a href="#">Profile settings </a></li>
+                        <li><a href="#"> History  </a></li>
+                        <li><a href="/messages"> Messages </a></li>
+                        <li><a href="/profile_settings">Profile settings </a></li>
                         <li role="separator" class="divider"></li>
                         <li id="logout" onclick="javascript: firebase.auth().signOut(); window.location = '/'"> <a href="#"> Logout</a> </li>
                     </ul>
