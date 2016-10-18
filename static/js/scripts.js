@@ -21,6 +21,8 @@ $(function () {
   if (window.location.pathname == '/messages') {
     loadMessages()
   }
+
+  displayUsers()
 })
 // profile settings functions
 function updateNick () {
@@ -348,8 +350,6 @@ function loadMessages () {
     chat.scrollTop = chat.scrollHeight - chat.clientHeight
   }.bind(this)
 
-  displayUsers()
-
   msgs.limitToLast(20).on('child_added', setMessage)
 }
 
@@ -373,21 +373,22 @@ function userSet (name, photoUrl, status) {
   var users = firebase.database().ref('/users')
   const user = firebase.auth().currentUser
   var userData = {}
-  
+
   if (status) {
     userData[user.uid] = status
   }else {
     return false
   }
-
   users.update(userData).then(function () {}, function (error) {
     pushMessage(error.message)
   })
 }
 
+// side chat doesn't really display users :(
 function displayUsers () {
   const users = firebase.database().ref('/users')
   users.on('child_changed', function (spanshot) {
+    console.log('changed')
     snapshot.forEach(function (user) {
       var data = user.val()
       console.log(data)
@@ -400,8 +401,20 @@ function displayUsers () {
   const query = users.orderByKey()
   query.once('value').then(function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
+      console.log('once')
       var data = childSnapshot.val()
       $('#users-found').append('<div>' + data.name + ' ' + data.status + '</div>')
     })
   })
 }
+
+// waiting for complete loading
+
+var loaded = setInterval(function () {
+  var count = $('.bubble').length
+  console.log(count)
+  if (count == 20) {
+    $('#loading').remove()
+    clearInterval(loaded)
+  }
+}, 500)
