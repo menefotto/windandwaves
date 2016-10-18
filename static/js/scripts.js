@@ -42,7 +42,7 @@ function updateNick () {
     pushError(error.message)
   })
 
-  userSet(nick, null, null)
+  userSet(nick, null, "true")
 
   window.setTimeout(function () {
     $('#collapseNick').collapse('hide')
@@ -95,7 +95,7 @@ function updatePhoto () {
       url = uploadTask.snapshot.downloadURL
 
       // cache user image localy and set it
-      userSet(user.displayName, url, null)
+      userSet(user.displayName, url, "true")
       // actually update user profile
       user.updateProfile({photoURL: url}).then(function () {
         pushMessage(user.displayName + ' Your new profile pic had been updated successfully!')
@@ -374,11 +374,7 @@ function userSet (name, photoUrl, status) {
   const user = firebase.auth().currentUser
   var userData = {}
 
-  if (status) {
-    userData[user.uid] = status
-  }else {
-    return false
-  }
+  userData[user.uid] = {"status" : status, "name":name}
   users.update(userData).then(function () {}, function (error) {
     pushMessage(error.message)
   })
@@ -387,32 +383,22 @@ function userSet (name, photoUrl, status) {
 // side chat doesn't really display users :(
 function displayUsers () {
   const users = firebase.database().ref('/users')
-  users.on('child_changed', function (spanshot) {
-    console.log('changed')
-    snapshot.forEach(function (user) {
-      var data = user.val()
-      console.log(data)
-      $('#users-found').append('<div>' + data.name + ' ' + data.online + '</div>')
-    })
-  }, function (error) {
-    pushError(error.message)
-  })
-
+  
   const query = users.orderByKey()
   query.once('value').then(function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
       console.log('once')
       var data = childSnapshot.val()
-      $('#users-found').append('<div>' + data.name + ' ' + data.status + '</div>')
+      console.log("data: ",data)
+      var name = "<strong>" + data.name + "</strong>"
+      $('#users-found').append('<li class="online">' + name + '</li>')
     })
   })
 }
 
 // waiting for complete loading
-
 var loaded = setInterval(function () {
   var count = $('.bubble').length
-  console.log(count)
   if (count == 20) {
     $('#loading').remove()
     clearInterval(loaded)

@@ -26,8 +26,8 @@ img {
 
 .gly-img {
     height: 80%;
-    max-height: 400px;
-    max-width: 400px;
+    max-height: 200px;
+    max-width: 200px;
     margin: 0 auto;
 }
 
@@ -59,27 +59,26 @@ img {
     padding-left: 80%;
 }
 
+.nobar{
+    max-width: 535px;
+    width: 100% !important;
+    overflow: hidden !important;
+}
+
 .chat-msgs {
-   overflow-y: scroll;
+   width: 100% !important;
    max-height: 550px;
-   border-style: groove;
-   
-   padding: 3%;
+   max-width: 535px;
+   border-style: groove;      
+   padding-right: 3%;
+   padding-left: 3%;
+   overflow-y: scroll;
 }
 
 .chat-msg-send{
    margin-right: 7%;
 }
 
-.noscroll{
-    overflow: hidden;
-}
-
-.scoller{
-}
-
-.center-right{
-}
 .user-search{
     height: 550px;
     border-style: groove;
@@ -88,12 +87,10 @@ img {
 }
 
 .users-found{
-   overflow-y: scroll;
+   overflow-y: auto;
    max-height: 90%;
    padding: 3%;
 }
-
-
 /* loading cool pic*/
 #loading {
     display: block;
@@ -107,4 +104,17 @@ img {
     background-image: url("/static/imgs/blue-preloader.gif");
     background-repeat: no-repeat;
     background-position: center;
+}
+/* doted online/offile user */
+.list-style{
+   list-style: none; 
+}
+
+.online {
+    color: black;
+}
+.online::before{
+    content: "●"; /* Insert content that looks like bullets */
+    padding-right: 8px;
+    color: green;
 }
