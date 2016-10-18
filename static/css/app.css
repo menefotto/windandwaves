@@ -92,7 +92,7 @@ img {
    padding: 3%;
 }
 /* loading cool pic*/
-#loading {
+.loading {
     display: block;
     position: absolute;
     top: 0;
@@ -116,5 +116,7 @@ img {
 .online::before{
     content: "●"; /* Insert content that looks like bullets */
     padding-right: 8px;
+    padding-left : 0px;
+    margin-left: -25%;
     color: green;
 }

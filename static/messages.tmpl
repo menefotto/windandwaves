@@ -1,7 +1,8 @@
 {{ define "content" }}
 <div class="row">
-    <div id="loading">
+    <div class="loading">
     </div>
+    
     <div class="col-md-3">
     </div>
     
@@ -19,17 +20,17 @@
         </div>
         <span class="help-block"></span>
             <div class="input-group">
-                <input id="msg" type="text" class="form-control">
+                <input id="msg" type="text" class="form-control" onkeyup="sendMessage(event)">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" onclick="sendMessage()" type="button"> Send </button>
+                    <button class="btn btn-primary" onclick="sendMessage(null)" type="button"> Send </button>
                 </span>
             </div>
         <span class="help-block"></span>
     </div>
     <div class="col-md-3">
         <div class="user-search">
-            <div class="form-group has-feedback center-right">
-                <input type="text" class="form-control" placeholder="Search user..." />
+            <div class="form-group has-feedback center-right" onkeyup="searchUsers(event)">
+                <input id='search' type="text" class="form-control" placeholder="Search user..." />
                 <i class="glyphicon glyphicon-search form-control-feedback"></i>
             </div>
             <div>
