@@ -1,8 +1,17 @@
+html, body {
+	margin: 0; 
+	height: 100%; 
+	overflow: hidden
+}
+
 #nav{
 	height: 80px !important;
 }
 
-#nav-logo {
+#logosign {
+	font-size: 24px;
+	font-family: "Gloria Hallelujah", cursive;
+	text-align: center;
 }
 
 #nav-title {
@@ -14,14 +23,21 @@
 	height: 100%;
 }
 
-#footer{
-	position:fixed;
-	bottom:0;
-	width: 100%;
-}
-
 #grid{
 	margin-top: 10%;
+	border-radius: 25px;
+	background-image: url("/static/imgs/windboards.jpg");
+}
+
+#login-img {
+	height: 20%;
+	font-size: 20px;
+	font-family: "Gloria Hallelujah", cursive;
+	margin: 0% 5% 10% 5%;
+}
+
+#pic-container {
+	margin-top: 20%;
 }
 
 #signup{
@@ -29,19 +45,21 @@
 }
 
 .login-h3{
-	font-size: 18px;
+	font-size: 16px;
        	font-family: 'Bitter', serif;
 	text-align: center;
 }
 
 /* linear gradient background */
 .gradient {
-	background: 0deg, #498fff; /* For browsers that do not support gradients */
-	background: -webkit-linear-gradient(0deg, #8eb9ff, white); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(0deg, #8eb9ff, white); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(0deg, #8eb9ff, white); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(0deg, #8eb9ff , white); /* Standard syntax */
+	background:  #498fff; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(0deg, #E8F1FF, white); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(0deg, #E8F1FF, white); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(0deg, #E8F1FF, white); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(0deg, ##E8F1FF , white); /* Standard syntax */
 }
+/* old color #8eb9ff */
+
 
 /* placeholder non standard uglyness */
 ::-webkit-input-placeholder {
@@ -65,6 +83,12 @@
 	color:    #999;
 }
 
+#footer{
+	position:fixed;
+	bottom:0;
+	height: 15%;
+	width: 100%;
+}
 /* loading cool pic*/
 .loading {
     display: block;

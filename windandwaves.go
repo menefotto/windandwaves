@@ -100,7 +100,7 @@ func init() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	gorillamux := mux.NewRouter()
-	gorillamux.HandleFunc("/", indexView)
+	gorillamux.HandleFunc("/windsurf", indexView)
 	http.Handle("/", gorillamux) // registering http to use gorilla mux
 
 	/*
