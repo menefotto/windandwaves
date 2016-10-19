@@ -16,16 +16,27 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script tepe="text/javascript" src="/static/js/semantic.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
-
+    <script type="text/javascript" src="static/js/waterandboards.js"></script>
     <!-- Imgs or icons -->
     <link rel="shortcut icon" href="/static/imgs/favicon.ico" type="image/x-icon" />
+    <script type="text/javascript">
+	function preload(arrayOfImages) {
+	    $(arrayOfImages).each(function(){
+		            $('<img/>')[0].src = this;
+			            // Alternatively you could use:
+			            // (new Image()).src = this;
+			        });
+	}
+	preload(["static/imgs/windboards.jpg"]);
+    </script>
 
     <!-- Headed head stuff -->
     	{{ template "head" }}
 
+
 </head>
 
-<body class="gradient">
+<body class="">
 	<div id="nav" class="ui fixed inverted menu">
 		<div class="ui container">
 			<a id="nav-title" href="#" class="header item">
