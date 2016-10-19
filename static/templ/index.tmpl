@@ -1,3 +1,67 @@
+{{ define "head" }} 
+<link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
+{{ end }}
+
 {{ define "page" }}
-	<h1> Template test here we go! </h1>
+	<div id="main" class="ui main container">
+		<div id="grid" class="ui grid">
+			<div class="two wide column"> 
+			</div>
+			<div class="six wide column"> 
+				<div class="ui segment">
+					<img class="ui fluid image" src="/static/imgs/nash.jpg">
+				</div>
+			</div>
+			<div class="six wide column"> 
+				<div class="ui segment">
+					<form id="signup" class="ui form">
+						<p class="ui dividing header login-h3"> Sign up to buy, sell and exchange boards with your friends! </p>
+						<div class="two fields">
+							<div class="field">
+								<input type="text" placeholder="First Name" required>
+							</div>
+							<div class="field">
+								<input type="text" placeholder="Last Name" required>
+							</div>
+						</div>
+						<div class="field">
+							<input type="text" placeholder="Username" required>
+						</div>
+
+						<div class="field">
+							<input type="email" placeholder="Email Address" required>
+						</div>
+						<div class="field">
+							<input type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+						</div>
+						<div class="field">
+							<button class="fluid ui blue button"> Sign up </button>
+						</div>
+						<div class="field">
+							<div class="ui horizontal divider">
+								    Or sign up with
+							</div>
+						</div>
+						<div class="field">
+							<button class="fluid ui facebook button social">
+								  <i class="facebook icon"></i> Facebook
+							</button>
+						</div>
+						<div class="field">
+							<button class="fluid ui twitter button social">
+								  <i class="twitter icon"></i> Twitter
+							</button>
+						</div>
+						<div class="field">
+							<button class="fluid ui google plus button social">
+								  <i class="google plus icon"></i> Google Plus
+							</button>
+						</div>
+					</form>	
+				</div>
+			</div>
+			<div class="two wide column"> 
+			</div>
+		</div>
+	</div>
 {{ end }}

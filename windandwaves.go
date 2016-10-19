@@ -43,7 +43,7 @@ func profileSettingsView(w http.ResponseWriter, r *http.Request) {
 }
 */
 
-func renderTemplate(w http.ResponseWriter, filename, basetmpl string, optval map[string]interface{}) {
+func renderTemplate(w http.ResponseWriter, filename, tmplname string, optval map[string]interface{}) {
 
 	tmpl, ok := templates[filename]
 	if !ok {
@@ -52,7 +52,7 @@ func renderTemplate(w http.ResponseWriter, filename, basetmpl string, optval map
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	err := tmpl.ExecuteTemplate(w, basetmpl, optval)
+	err := tmpl.ExecuteTemplate(w, tmplname, optval)
 	if err != nil {
 		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -73,7 +73,7 @@ func loadTemplates() error {
 	Must := template.Must
 	Parse := template.ParseFiles
 
-	templates["index.html"] = Must(Parse("index.tmpl", "base.tmpl", "base_pubblic.tmpl"))
+	templates["index.html"] = Must(Parse("base.tmpl", "base_pubblic.tmpl", "index.tmpl"))
 	/*
 		templates["login.html"] = Must(Parse("login.tmpl", "base.tmpl"))
 		templates["signup.html"] = Must(Parse("signup.tmpl", "base.tmpl"))

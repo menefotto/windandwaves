@@ -1,11 +1,22 @@
-{{ define "head" }}
+{{ define "head" }} {{ end }}
 
+{{ define "page" }}
+	{{ template "content" }}
 {{ end }}
 
-{{ define "content" }}
-
-	<h3> Template nesting here we go !</h3>
-	{{ template "page" }}
-
-
+{{ define "footer" }}
+<div id="footer" class="ui fixed inverted footer segment">
+	<div class="ui center aligned container">
+		<div class="ui inverted section divider"></div>
+		<img src="/static/imgs/Water-48.png" class="ui centered mini image">
+		<div class="ui horizontal inverted small divided link list">
+			<a class="item" href="#"> Site Map </a>
+			<a class="item" href="#"> Contact Us </a>
+			<a class="item" href="#"> Term and Conditions </a>
+			<a class="item" href="#"> Privacy policy </a>
+			<a class="item" href="#"> Credits </a>
+		</div>			
+	</div>
+</div>
 {{ end }}
+

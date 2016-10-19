@@ -1,12 +1,10 @@
-{{ define "head" }}
+{{ define "header" }} {{ end }}
 
+{{ define "page" }}
+	{{ template "content" }}
 {{ end }}
 
-{{ define "content" }}
-	
-	<h3> Double nested template test! </h3>
-
-	{{ template "page" }}
-
-
+{{ define "footer" }}
+	<h4> Created by wind85 allright reserves </h4>
 {{ end }}
+
