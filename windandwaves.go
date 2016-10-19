@@ -10,9 +10,10 @@ import (
 )
 
 func indexView(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "index.html", "base_pubblic", nil)
+	renderTemplate(w, "index.html", "base", nil)
 }
 
+/*
 func loginView(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "login.html", "base", nil)
 }
@@ -40,6 +41,8 @@ func changePasswordView(w http.ResponseWriter, r *http.Request) {
 func profileSettingsView(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "profile_settings.html", "base_private", nil)
 }
+*/
+
 func renderTemplate(w http.ResponseWriter, filename, basetmpl string, optval map[string]interface{}) {
 
 	tmpl, ok := templates[filename]
@@ -59,7 +62,7 @@ func renderTemplate(w http.ResponseWriter, filename, basetmpl string, optval map
 var templates map[string]*template.Template
 
 func loadTemplates() error {
-	if err := os.Chdir("static/"); err != nil {
+	if err := os.Chdir("static/templ"); err != nil {
 		return err
 	}
 
@@ -70,16 +73,18 @@ func loadTemplates() error {
 	Must := template.Must
 	Parse := template.ParseFiles
 
-	templates["index.html"] = Must(Parse("index.tmpl", "base_pubblic.tmpl"))
-	templates["login.html"] = Must(Parse("login.tmpl", "base.tmpl"))
-	templates["signup.html"] = Must(Parse("signup.tmpl", "base.tmpl"))
-	templates["loggedin.html"] = Must(Parse("loggedin.tmpl", "base_private.tmpl"))
-	templates["messages.html"] = Must(Parse("messages.tmpl", "base_private.tmpl"))
-	templates["reset_password.html"] = Must(Parse("reset_password.tmpl", "base.tmpl"))
-	templates["change_password.html"] = Must(Parse("change_password.tmpl", "base.tmpl"))
-	templates["profile_settings.html"] = Must(Parse("profile_settings.tmpl", "base_private.tmpl"))
+	templates["index.html"] = Must(Parse("index.tmpl", "base.tmpl", "base_pubblic.tmpl"))
+	/*
+		templates["login.html"] = Must(Parse("login.tmpl", "base.tmpl"))
+		templates["signup.html"] = Must(Parse("signup.tmpl", "base.tmpl"))
+		templates["loggedin.html"] = Must(Parse("loggedin.tmpl", "base_private.tmpl"))
+		templates["messages.html"] = Must(Parse("messages.tmpl", "base_private.tmpl"))
+		templates["reset_password.html"] = Must(Parse("reset_password.tmpl", "base.tmpl"))
+		templates["change_password.html"] = Must(Parse("change_password.tmpl", "base.tmpl"))
+		templates["profile_settings.html"] = Must(Parse("profile_settings.tmpl", "base_private.tmpl"))
+	*/
 
-	if err := os.Chdir("../"); err != nil {
+	if err := os.Chdir("../../"); err != nil {
 		return err
 	}
 
@@ -96,12 +101,15 @@ func init() {
 
 	gorillamux := mux.NewRouter()
 	gorillamux.HandleFunc("/", indexView)
-	gorillamux.HandleFunc("/login", loginView)
-	gorillamux.HandleFunc("/signup", signupView)
-	gorillamux.HandleFunc("/loggedin", loggedinView)
-	gorillamux.HandleFunc("/messages", messagesView)
-	gorillamux.HandleFunc("/password_reset", passwordResetView)
-	gorillamux.HandleFunc(`/change_password/{rest:.*}`, changePasswordView)
-	gorillamux.HandleFunc(`/profile_settings`, profileSettingsView)
 	http.Handle("/", gorillamux) // registering http to use gorilla mux
+
+	/*
+		gorillamux.HandleFunc("/login", loginView)
+		gorillamux.HandleFunc("/signup", signupView)
+		gorillamux.HandleFunc("/loggedin", loggedinView)
+		gorillamux.HandleFunc("/messages", messagesView)
+		gorillamux.HandleFunc("/password_reset", passwordResetView)
+		gorillamux.HandleFunc(`/change_password/{rest:.*}`, changePasswordView)
+		gorillamux.HandleFunc(`/profile_settings`, profileSettingsView)
+	*/
 }

@@ -21,8 +21,6 @@ $(function () {
   if (window.location.pathname == '/messages') {
     loadMessages()
   }
-
-  displayUsers()
 })
 // profile settings functions
 function updateNick () {
@@ -41,8 +39,6 @@ function updateNick () {
   }, function (error) {
     pushError(error.message)
   })
-
-  userSet(nick, null, 'true')
 
   window.setTimeout(function () {
     $('#collapseNick').collapse('hide')
@@ -95,7 +91,7 @@ function updatePhoto () {
       url = uploadTask.snapshot.downloadURL
 
       // cache user image localy and set it
-      userSet(user.displayName, url, 'true')
+      saveImg(url)
       // actually update user profile
       user.updateProfile({photoURL: url}).then(function () {
         pushMessage(user.displayName + ' Your new profile pic had been updated successfully!')
@@ -154,22 +150,6 @@ function login () {
   return false
 }
 
-function logOut () {
-  var user = firebase.auth().currentUser
-
-  if (!user.displayName) {
-    userSet(user.displayName, null, 'false')
-  }else {
-    userSet(user.email, null, 'false')
-  }
-
-  firebase.auth().signOut().then(function () {
-    // ok case    
-  }, function (error) {
-    pushError(error.message)
-  })
-}
-
 function signup () {
   const user = $('#username').val()
   const pass = $('#password').val()
@@ -206,7 +186,7 @@ function twlogin () {
 
 function fblogin () {
   var provider = new firebase.auth.FacebookAuthProvider()
-  
+
   firebase.auth().signInWithRedirect(provider).then(function () {}, function (error) {
     pushError(error.message)
   })
@@ -219,7 +199,7 @@ function loggedinRedirect (user) {
 
   if (cuser == 'yes') {
     if (location.pathname == '/login') {
-      location.replace('../profile_settings')
+      location.replace('../loggedin')
     }
   }
 
@@ -231,24 +211,13 @@ function loggedinRedirect (user) {
     $('#profileImg').attr('src', user.photoURL)
   }
 
-  cuser.displayName = ''
-
   if (!user.displayName) {
-    cuser.displayName = user.email
     $('#loggedin-btn').append(s + user.email + e + '  ' + span)
   }else {
-    cuser.displayName = user.displayName
     $('#loggedin-btn').append(s + user.displayName + e + '  ' + span)
   }
 
   $('#loggedin-btn').removeClass('hide')
-  if (!user.photoURL) {
-    setUser(cuser.displayName, null, 'true')
-  }else {
-    setUser(cuser.displayName, user.photoURL, 'true')
-  }
-
-  $('body').removeClass('loader')
 }
 
 // password  reset/change functions
@@ -328,13 +297,6 @@ function saveImg (url) {
 }
 
 // chat functions
-function getCurDateTime () {
-  var date = new Date()
-  var unixTime = date.getTime()
-
-  return unixTime
-}
-
 function displayMessage (key, displayName, text, photoUrl) {
   var helpSpan = '<span class="help-block"></span>'
   name = '<strong>' + displayName + ' : </strong>'
@@ -342,120 +304,34 @@ function displayMessage (key, displayName, text, photoUrl) {
 }
 
 function loadMessages () {
+  divs = $('#msgList').find('div')
+  if (divs.lenght > 1) {
+    return
+  }
+
   const msgs = firebase.database().ref('/messages')
 
   var setMessage = function (data) {
     var val = data.val()
     displayMessage(data.key, val.name, val.text, val.photoUrl)
-    // needed to keep the bar scrolled down
-    var chat = $('#chat').get(0)
-    chat.scrollTop = chat.scrollHeight - chat.clientHeight
   }.bind(this)
 
-  msgs.limitToLast(20).on('child_added', setMessage)
+  msgs.limitToLast(12).on('child_added', setMessage)
 }
 
-function sendMessage (event) {
-  if (event != null) {
-    event.which = event.which || event.keyCode
-    if (event.which != 13) {
-      return
-    }
-  }
-
-  const date = getCurDateTime()
+function sendMessage () {
   const user = firebase.auth().currentUser
   const msg = $('#msg').val()
   const name = user.displayName
   $('#msg').val('')
 
-  firebase.database().ref('/messages/' + date).update({'name': name, 'text': msg}).then(function (spanshot) {}, function (error) {
+  firebase.database().ref('/messages/' + user.uid).update({'name': name, 'text': msg}).then(function (spanshot) {
+    displayMessage(null, name , msg , user.photoURL)
+  }, function (error) {
     if (error.code == 'PERMISSION_DENIED') {
       pushError(' Messages must no be longer than 100 charachters!')
-    }else {
+    }else{
       pushError(error.message)
-    }
+    }    
   })
-}
-
-function userSet (name, photoUrl, status) {
-  var users = firebase.database().ref('/users')
-  const user = firebase.auth().currentUser
-  var userData = {}
-
-  userData[user.uid] = {'status': status, 'name': name}
-  users.update(userData).then(function () {}, function (error) {
-    pushMessage(error.message)
-  })
-}
-
-function displayUsers () {
-  const users = firebase.database().ref('/users')
-
-  const query = users.orderByKey()
-  query.once('value').then(function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
-      console.log('once')
-      var data = childSnapshot.val()
-      console.log('data: ', data)
-      var name = '<strong>' + data.name + '</strong>'
-      $('#users-found').append('<li class="online">' + name + '</li>')
-    })
-  })
-}
-
-// waiting for complete chat loading
-var loaded = setInterval(function () {
-  var count = $('.bubble').length
-  if (count == 20) {
-    $('.loading').remove()
-    clearInterval(loaded)
-  }
-}, 500)
-
-
-// still a little broken, what can I say!
-function searchUsers (event) {
-  if (event != null) {
-    event.which = event.which || event.keyCode
-    if (event.which != 13) {
-      return
-    }
-  }
-  var gotUsers = {}
-  var term = $('#search').val()
-
-  const users = firebase.database().ref('/users')
-  users.orderByKey().on('value', function (snapshot) {
-    snapshot.forEach(function (childsnap) {
-      gotUsers[childsnap.name] = childsnap.status
-    }, function (error) {
-      console.log(error.message)
-    }, function (error) {
-      console.log(error.message)
-    })
-  })
-
-  var computetDistance = function (key, value, mapUsers) {
-    var distance = levenshteinDistance(term, key)
-    if (distance <= 3) {
-      var name = '<strong>' + key + '</strong>'
-      $('#users-found').append('<li class="online">' + name + '</li>')
-    }
-  }
-
-  gotUsers.forEach(computetDistance)
-}
-
-// levishenDistance stolen form the internet see https://gist.github.com/andrei-m/982927
-
-function levenshteinDistance (s, t) {
-  if (!s.length) return t.length
-  if (!t.length) return s.length
-
-  return Math.min(
-      levenshteinDistance(s.substr(1), t) + 1,
-      levenshteinDistance(t.substr(1), s) + 1,
-      levenshteinDistance(s.substr(1), t.substr(1)) + (s[0] !== t[0] ? 1 : 0)
-    ) + 1
 }

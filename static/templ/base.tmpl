@@ -1,0 +1,35 @@
+{{ define "base" }}
+<!DOCTYPE html lang="en">
+
+<head>
+    <title>Wind&Wawes</title>
+    <!-- Css libs  -->
+    <link href="/static/css/semantic.min.css" rel="stylesheet">
+    <link href="/static/css/app.css" rel="stylesheet">
+
+    <!-- Optional fonts -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+
+    <!-- Js libs -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script tepe="text/javascript" src="/static/js/semantic.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+
+    <!-- Imgs or icons -->
+    <link rel="shortcut icon" href="/static/imgs/favicon.ico" type="image/x-icon" />
+
+    {{ template "head" }}
+
+</head>
+
+<body>
+    <div>
+                
+	    {{ template "content" }}
+        
+    </div>
+</body>
+
+</html>
+{{ end }}

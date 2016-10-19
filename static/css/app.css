@@ -60,7 +60,6 @@ img {
 }
 
 .nobar{
-    max-width: 535px;
     width: 100% !important;
     overflow: hidden !important;
 }
@@ -68,7 +67,6 @@ img {
 .chat-msgs {
    width: 100% !important;
    max-height: 550px;
-   max-width: 535px;
    border-style: groove;      
    padding-right: 3%;
    padding-left: 3%;
@@ -116,7 +114,5 @@ img {
 .online::before{
     content: "●"; /* Insert content that looks like bullets */
     padding-right: 8px;
-    padding-left : 0px;
-    margin-left: -25%;
     color: green;
 }
