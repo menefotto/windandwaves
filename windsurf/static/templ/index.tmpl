@@ -1,0 +1,76 @@
+{{ define "head" }} 
+<link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
+{{ end }}
+
+{{ define "page" }}
+	<div id="main" class="ui main container">
+		<div id="loader" class="ui page active dimmer"> 
+			<div class="ui huge text loader">
+				Loading
+			</div>
+		</div>
+		<div id="grid" class="two column stackable ui grid">
+			<div class="column"> 
+				<div id="mission" class="ui segment sizer">
+					<div class="ui middle aligned fluid">
+						<p>
+							We are commited to help you find, rent, buy, sell, exchange
+							you next board... Because every *surfer knows 
+							you can't buy happiness but you can get a *board and
+							that's pretty close...
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="column"> 
+				<div id="signup" class="ui segment sizer-login">
+					<form class="ui form">
+						<h3 id="logosign"> Water&Boards </h3>
+						<p class="ui dividing header login-h3"> Sign up to buy, sell and exchange boards with your friends! </p>
+						<div class="two fields">
+							<div class="field">
+								<input type="text" placeholder="First Name" required>
+							</div>
+							<div class="field">
+								<input type="text" placeholder="Last Name" required>
+							</div>
+						</div>
+						<div class="field">
+							<input type="text" placeholder="Username" required>
+						</div>
+						<div class="field">
+							<input type="email" placeholder="Email Address" required>
+						</div>
+						<div class="field">
+							<input type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+						</div>
+						<div class="field">
+							<button class="fluid ui blue button"> Sign up </button>
+						</div>
+						<div class="field">
+							<div class="ui horizontal divider">
+										Or sign up with
+							</div>
+						</div>
+						<div class="field">
+							<button class="fluid ui facebook button social" onclick="location.href='http://localhost:3000/auth/facebook'">
+									<i class="facebook icon"></i> Facebook
+							</button>
+						</div>
+						<div class="field">
+							<button class="fluid ui google plus button social">
+									<i class="google plus icon"></i> Google Plus
+							</button>
+						</div>
+
+						<div class="field">
+							<button class="fluid ui button">
+									<i class="spy icon"></i> Anonymus
+							</button>
+						</div>
+					</form>	
+				</div>
+			</div>
+		</div>
+	</div>
+{{ end }}

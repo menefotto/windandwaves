@@ -1,0 +1,15 @@
+application: windandwaves-146109
+version: test
+runtime: go
+api_version: go1
+
+handlers:
+- url: /favicon\.ico
+  mime_type: image/vnd.microsoft.icon
+  static_files: static/imgs/favicon.ico
+  upload: static/imgs/favicon\.ico
+
+- url: /.*
+  script: _go_app
+
+
