@@ -1,11 +1,17 @@
-html, body {
-	margin: 0; 
-	height: 100%; 
-	overflow: hidden
+html {
+	position:relative;
+  height: 100%;
+  width: 100%;
+}
+
+body{
+	maring: 0 0 150px; /* bottom = footer heigth */
 }
 
 #nav{
 	height: 80px !important;
+	margin-bottom:10%;
+  width: 100%;
 }
 
 #logosign {
@@ -20,13 +26,20 @@ html, body {
 }
 
 #main{
-	height: 100%;
+	/* nothing that I can think of */
 }
 
 #grid{
-	margin-top: 10%;
+	margin: auto
 	border-radius: 25px;
+
 	background-image: url("/static/imgs/windboards.jpg");
+	-moz-background-size: 100% 100%;
+	-o-background-size: 100% 100%;
+	-webkit-background-size: 100% 100%; 
+	background-size: 100% 100%;
+	background-position: center top;
+	background-repeat: no-repeat;
 }
 
 #login-img {
@@ -46,7 +59,7 @@ html, body {
 
 .login-h3{
 	font-size: 16px;
-       	font-family: 'Bitter', serif;
+	font-family: 'Bitter', serif;
 	text-align: center;
 }
 
@@ -83,12 +96,24 @@ html, body {
 	color:    #999;
 }
 
+.sizer-login{
+	width: 95%;
+	height: 80%;
+}
+
+.sizer{
+	width: 95%;
+}
+
 #footer{
-	position:fixed;
+	margin-top:10%;
+	position:abosolute;
+	left :0;
 	bottom:0;
-	height: 15%;
+	height: 150px;
 	width: 100%;
 }
+
 /* loading cool pic*/
 .loading {
     display: block;
@@ -99,7 +124,7 @@ html, body {
     width: 100vw;
     height: 100vh;
     background-color: rgba(192, 192, 192, 0.5);
-    background-image: url("/static/imgs/blue-preloader.gif");
+    background-image: url("/static/imgs/blue-preloader.gif")scroll;
     background-repeat: no-repeat;
     background-position: center;
 }
