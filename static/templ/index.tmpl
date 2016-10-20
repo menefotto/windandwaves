@@ -1,6 +1,5 @@
 {{ define "head" }} 
 <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
-<!-- <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> -->
 {{ end }}
 
 {{ define "page" }}
@@ -9,12 +8,10 @@
 			<div class="ui huge text loader">
 				Loading
 			</div>
-		</div>
-		<div id="grid" class="ui grid">
-			<div class="two wide column"> 
-			</div>
-			<div id="pic-container" class="six wide column"> 
-				<div class="ui segment">
+	</div>
+		<div id="grid" class="two column stackable ui grid">
+			<div id="pic-container" class="column"> 
+				<div class="ui segment sizer">
 					<div id="login-img" class="ui middle aligned fluid">
 						<p>
 							We are commited to help you find, rent, buy, sell, exchange
@@ -25,8 +22,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="six wide column"> 
-				<div class="ui segment">
+			<div class="column"> 
+				<div class="ui segment sizer">
 					<form id="signup" class="ui form">
 						<h3 id="logosign"> Water&Boards </h3>
 						<p class="ui dividing header login-h3"> Sign up to buy, sell and exchange boards with your friends! </p>
@@ -74,8 +71,6 @@
 						</div>
 					</form>	
 				</div>
-			</div>
-			<div class="two wide column"> 
 			</div>
 		</div>
 	</div>
