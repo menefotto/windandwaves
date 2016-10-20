@@ -1,12 +1,7 @@
 html {
-	overflow-x:hidden;
-	position:relative;
+	overflow-x: hidden;
   height: 100%;
   width: 100%;
-}
-
-body{
-	maring: 0 0 150px; /* bottom = footer heigth */
 }
 
 #nav{
@@ -28,12 +23,12 @@ body{
 
 #main{
 	/* nothing that I can think of */
+	margin-bottom: 150px;
 }
 
 #grid{
-	margin: auto
+/*	margin: auto;*/
 	border-radius: 25px;
-
 	background-image: url("/static/imgs/windboards.jpg");
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -43,25 +38,50 @@ body{
 	background-repeat: no-repeat;
 }
 
-#login-img {
-	height: 20%;
+#mission {
+	height: auto;
 	font-size: 20px;
 	font-family: "Gloria Hallelujah", cursive;
-	margin: 0% 5% 10% 5%;
-}
-
-#pic-container {
-	margin-top: 20%;
+	margin-left: 5%;
 }
 
 #signup{
-	margin:10% 10% 10% 10%;
+	margin-left: 5%;
+	padding: 10%;
 }
 
 .login-h3{
 	font-size: 16px;
 	font-family: 'Bitter', serif;
 	text-align: center;
+}
+
+.sizer-login{
+	width: 90%;
+	height: auto;
+}
+
+.sizer{
+	height: auto;
+	width: 90%;
+}
+
+#footer{
+	position:relative;
+	clear:both;
+	margin-top:10%;
+	padding-bottom:150px;
+	left :0;
+	bottom:0;
+	height: 150px;
+	width: 100%;
+}
+
+/* css awesomeness hide on mobile */
+@media screen and (max-width:	767px ) {
+	div#mission.ui.segment.sizer {
+		display:none;
+	}
 }
 
 /* linear gradient background */
@@ -72,47 +92,27 @@ body{
 	background: -moz-linear-gradient(0deg, #E8F1FF, white); /* For Firefox 3.6 to 15 */
 	background: linear-gradient(0deg, ##E8F1FF , white); /* Standard syntax */
 }
-/* old color #8eb9ff */
-
 
 /* placeholder non standard uglyness */
 ::-webkit-input-placeholder {
 	font-size: 110%;
-    	font-weight: 600;
+	font-weight: 600;
 	color:    #999;
 }
 :-moz-placeholder {
-    	font-weight: 600;
+  font-weight: 600;
 	font-size: 110%;
 	color:    #999;
 }
 ::-moz-placeholder {
-    	font-weight: 600;
+	font-weight: 600;
 	font-size: 110%;
 	color:    #999;
 }
 :-ms-input-placeholder {
-    	font-weight: 600;
+  font-weight: 600;
 	font-size: 110%;
 	color:    #999;
-}
-
-.sizer-login{
-	width: 95%;
-	height: 80%;
-}
-
-.sizer{
-	width: 95%;
-}
-
-#footer{
-	margin-top:10%;
-	position:abosolute;
-	left :0;
-	bottom:0;
-	height: 150px;
-	width: 100%;
 }
 
 /* loading cool pic*/
