@@ -1,5 +1,6 @@
 application: waterandboards
 version: dev
+module: sup
 runtime: go
 api_version: go1
 

@@ -1,5 +1,6 @@
 application: waterandboards
 version: dev
+module: windsurf
 runtime: go
 api_version: go1
 

@@ -4,7 +4,7 @@ function preload(arrayOfImages) {
 			(new Image()).src = this;
 	});
 }
-preload(["static/imgs/windboards.jpg"]);
+preload(["static/imgs/supboards.jpg"]);
 
 // on main image load hide the dimmer...
 $(document).ready(function() {
