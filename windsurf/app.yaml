@@ -1,5 +1,5 @@
-application: windandwaves-146109
-version: test
+application: waterandboards
+version: dev
 runtime: go
 api_version: go1
 
