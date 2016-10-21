@@ -1,0 +1,146 @@
+html {
+	overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+#nav{
+	height: 80px !important;
+	margin-bottom:10%;
+  width: 100%;
+}
+
+#logosign {
+	font-size: 24px;
+	font-family: "Gloria Hallelujah", cursive;
+	text-align: center;
+}
+
+#nav-title {
+	font-size: 24px;
+	font-family: "Gloria Hallelujah", cursive;
+}
+
+#main{
+	/* nothing that I can think of */
+	margin-bottom: 150px;
+}
+
+#grid{
+/*	margin: auto;*/
+	border-radius: 25px;
+	background-image: url("/static/imgs/windboards.jpg");
+	-moz-background-size: 100% 100%;
+	-o-background-size: 100% 100%;
+	-webkit-background-size: 100% 100%; 
+	background-size: 100% 100%;
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+
+#mission {
+	height: auto;
+	font-size: 20px;
+	font-family: "Gloria Hallelujah", cursive;
+	margin-left: 5%;
+	margin-top: 45%;
+}
+
+#signup{
+	margin-left: 5%;
+	padding: 10%;
+}
+
+.login-h3{
+	font-size: 16px;
+	font-family: 'Bitter', serif;
+	text-align: center;
+}
+
+.sizer-login{
+	width: 90%;
+	height: auto;
+}
+
+.sizer{
+	height: auto;
+	width: 90%;
+}
+
+#footer{
+	position:relative;
+	clear:both;
+	margin-top:10%;
+	padding-bottom:150px;
+	left :0;
+	bottom:0;
+	height: 150px;
+	width: 100%;
+}
+
+/* css awesomeness hide on mobile */
+@media screen and (max-width:	767px ) {
+	div#mission.ui.segment.sizer {
+		display:none;
+	}
+}
+
+/* linear gradient background */
+.gradient {
+	background:  #498fff; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(0deg, #E8F1FF, white); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(0deg, #E8F1FF, white); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(0deg, #E8F1FF, white); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(0deg, ##E8F1FF , white); /* Standard syntax */
+}
+
+/* placeholder non standard uglyness */
+::-webkit-input-placeholder {
+	font-size: 110%;
+	font-weight: 600;
+	color:    #999;
+}
+:-moz-placeholder {
+  font-weight: 600;
+	font-size: 110%;
+	color:    #999;
+}
+::-moz-placeholder {
+	font-weight: 600;
+	font-size: 110%;
+	color:    #999;
+}
+:-ms-input-placeholder {
+  font-weight: 600;
+	font-size: 110%;
+	color:    #999;
+}
+
+/* loading cool pic*/
+.loading {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(192, 192, 192, 0.5);
+    background-image: url("/static/imgs/blue-preloader.gif")scroll;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* doted online/offile user */
+.list-style{
+   list-style: none; 
+}
+
+.online {
+    color: black;
+}
+.online::before{
+    content: "●"; /* Insert content that looks like bullets */
+    padding-right: 8px;
+    color: green;
+}
