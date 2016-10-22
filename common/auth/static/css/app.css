@@ -1,0 +1,90 @@
+html {
+	overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+#nav{
+	height: 80px !important;
+	margin-bottom:10%;
+  width: 100%;
+}
+
+#logosign {
+	font-size: 24px;
+	font-family: "Gloria Hallelujah", cursive;
+	text-align: center;
+}
+
+#nav-title {
+	font-size: 24px;
+	font-family: "Gloria Hallelujah", cursive;
+}
+
+#main{
+	margin-bottom: 150px;
+}
+
+#signup{
+	margin-left: 20%;
+	padding: 10%;
+	box-shadow: 10px 10px 5px #888888;
+	border-width: 2px;
+}
+
+#message {
+	color: red;
+}
+
+.login-h3{
+	font-size: 16px;
+	font-family: 'Bitter', serif;
+	text-align: center;
+}
+
+.sizer-login{
+	width: 60%;
+	height: auto;
+}
+
+/* css awesomeness hide on mobile */
+@media screen and (max-width:	767px ) {
+	div#signup {
+		width: 90% !important;
+		margin-left: 5%;
+	}
+}
+
+#footer{
+	position:relative;
+	clear:both;
+	margin-top:10%;
+	padding-bottom:150px;
+	left :0;
+	bottom:0;
+	height: 150px;
+	width: 100%;
+}
+
+/* placeholder non standard uglyness */
+::-webkit-input-placeholder {
+	font-size: 110%;
+	font-weight: 600;
+	color:    #999;
+}
+:-moz-placeholder {
+  font-weight: 600;
+	font-size: 110%;
+	color:    #999;
+}
+::-moz-placeholder {
+	font-weight: 600;
+	font-size: 110%;
+	color:    #999;
+}
+:-ms-input-placeholder {
+  font-weight: 600;
+	font-size: 110%;
+	color:    #999;
+}
+

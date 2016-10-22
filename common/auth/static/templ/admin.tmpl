@@ -1,0 +1,35 @@
+{{ define "head" }} 
+<link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
+{{ end }}
+
+{{ define "page" }}
+	<div id="main" class="ui main container">
+		<div id="loader" class="ui page dimmer"> 
+			<div class="ui huge text loader">
+				Loading
+			</div>
+		</div>
+		<div id="grid" class="one column stackable ui grid">
+			<div class="column"> 
+				<div id="signup" class="ui segment sizer-login">
+					<form class="ui form" method="POST">
+						<h3 id="logosign"> Water&Boards User Admin </h3>
+						<p id="message" class="ui dividing header login-h3"> 
+							Trying to enter this part of the site is highly prohibited unless
+							you are an authorized site admin.
+						</p>
+						<div class="field">
+							<input type="text" name="username" placeholder="Username" required>
+						</div>
+						<div class="field">
+							<input type="password" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+						</div>
+						<div class="field">
+							<button type="submit" class="fluid ui blue button" action="/authuser"> Login </button>
+						</div>
+					</form>	
+				</div>
+			</div>
+		</div>
+	</div>
+{{ end }}
